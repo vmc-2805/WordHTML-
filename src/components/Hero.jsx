@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { ArrowDown, Sparkles, Zap } from 'lucide-react';
+import { ArrowDown, FileCode, Zap } from 'lucide-react';
 
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
@@ -44,7 +44,7 @@ export default function Hero() {
       <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Badge */}
         <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-6 sm:mb-8 transition-all duration-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-          <Sparkles className="w-4 h-4 text-primary-500 dark:text-primary-400 animate-pulse" />
+          <FileCode className="w-4 h-4 text-primary-500 dark:text-primary-400 animate-pulse" />
           <span className="text-sm text-primary-600 dark:text-primary-300 font-medium">Free Online Word to HTML Converter</span>        </div>
 
         {/* Heading with typing effect */}

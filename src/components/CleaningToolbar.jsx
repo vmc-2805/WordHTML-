@@ -1,6 +1,6 @@
 ﻿import {
   Eraser, Paintbrush, Trash2, Tag, Hash,
-  MessageSquare, Minimize2, FileText, Code2, Sparkles
+  MessageSquare, Minimize2, FileText, Code2, FileCode
 } from 'lucide-react'
 
 const CleanButton = ({ onClick, title, icon: Icon, color }) => (
@@ -28,7 +28,7 @@ export default function CleaningToolbar({ onClean, onCleanAll, onFormat }) {
       <CleanButton onClick={() => onClean('whitespace')} title="Remove Extra Whitespace" icon={Minimize2} color="text-cyan-500" />
       <CleanButton onClick={() => onClean('wordMarkup')} title="Remove Word Markup" icon={FileText} color="text-orange-500" />
       <CleanButton onClick={() => onClean('spans')} title="Remove Spans" icon={Code2} color="text-pink-500" />
-      <CleanButton onClick={() => onClean('semantic')} title="Semantic HTML" icon={Sparkles} color="text-emerald-500" />
+      <CleanButton onClick={() => onClean('semantic')} title="Semantic HTML" icon={FileCode} color="text-emerald-500" />
 
       <div className="toolbar-divider" />
 

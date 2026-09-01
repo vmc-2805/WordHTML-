@@ -1,4 +1,4 @@
-﻿import { ArrowRight, Zap, Sparkles } from 'lucide-react'
+﻿import { ArrowRight, Zap, WandSparkles } from 'lucide-react'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
 export default function CTA() {
@@ -53,7 +53,7 @@ export default function CTA() {
                 href="#editor"
                 className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-primary-600 font-bold hover:bg-slate-50 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-black/20"
               >
-                <Sparkles className="w-5 h-5 transition-transform group-hover:rotate-12" />
+                <WandSparkles className="w-5 h-5 transition-transform group-hover:rotate-12" />
                 Open Editor
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
               </a>
