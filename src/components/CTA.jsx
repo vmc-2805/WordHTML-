@@ -37,7 +37,7 @@ export default function CTA() {
             <h2 className={`text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4 leading-tight transition-all duration-700 delay-300 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}>
-              Ready to Convert Your Documents?
+              Ready to Convert Your Documents to HTML?
             </h2>
 
             <p className={`text-lg text-white/80 max-w-xl mx-auto mb-8 transition-all duration-700 delay-400 ${

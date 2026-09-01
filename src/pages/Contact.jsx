@@ -1,11 +1,18 @@
 import { useState } from 'react';
-import { Mail, ArrowLeft, Send, MessageCircle, CheckCircle } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Mail, Send, MessageCircle, CheckCircle } from 'lucide-react';
 import PageLayout from './PageLayout';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Contact() {
   const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
   const [sent, setSent] = useState(false);
+
+  useSEO({
+    title: 'Contact Us | WordConvertHTML',
+    description: 'Contact WordConvertHTML support. Questions, suggestions, or feedback about our free Word to HTML converter.',
+    canonical: 'https://wordconverthtml.com/contact'
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,9 +24,12 @@ export default function Contact() {
   return (
     <PageLayout title="Contact Us" icon={Mail}>
       <div className="space-y-8 text-slate-700 dark:text-surface-300 text-sm sm:text-base leading-relaxed">
-        <Link to="/" className="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors mb-4">
-          <ArrowLeft className="w-4 h-4" /> Back to Home
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Contact Us' }
+          ]}
+        />
 
         <p className="text-lg text-slate-600 dark:text-surface-400">
           Have a question, suggestion, or need help? We'd love to hear from you.
@@ -33,7 +43,7 @@ export default function Contact() {
             </div>
             <div>
               <span className="text-sm font-semibold text-slate-900 dark:text-white block mb-1">Email Us</span>
-              <span className="text-sm text-slate-500 dark:text-surface-400">support@wordhtmleditor.com</span>
+              <span className="text-sm text-slate-500 dark:text-surface-400">support@wordconverthtml.com</span>
             </div>
           </div>
           <div className="flex items-start gap-4 p-5 rounded-xl bg-accent-50 dark:bg-accent-500/5 border border-accent-100 dark:border-accent-500/10">

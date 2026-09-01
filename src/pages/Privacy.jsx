@@ -1,14 +1,24 @@
-import { Shield, ArrowLeft, Calendar, Lock, Eye, Database, Globe } from 'lucide-react';
+import { Shield, Calendar, Lock, Eye, Database, Globe } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageLayout from './PageLayout';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Privacy() {
+  useSEO({
+    title: 'Privacy Policy | WordConvertHTML',
+    description: 'Read the Privacy Policy for WordConvertHTML. Your data is 100% secure - all processing happens in your browser, nothing is stored on servers.',
+    canonical: 'https://wordconverthtml.com/privacy'
+  });
   return (
     <PageLayout title="Privacy Policy" icon={Shield}>
       <div className="space-y-8 text-slate-700 dark:text-surface-300 text-sm sm:text-base leading-relaxed">
-        <Link to="/" className="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors mb-4">
-          <ArrowLeft className="w-4 h-4" /> Back to Home
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Privacy Policy' }
+          ]}
+        />
 
         <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-surface-500">
           <Calendar className="w-3.5 h-3.5" />
@@ -33,7 +43,7 @@ export default function Privacy() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">1. Information We Do NOT Collect</h3>
           <p className="mb-4">
-            Word HTML Editor is designed with privacy as a core principle. We do <strong>not</strong> collect, store, or transmit any personal information, including:
+            WordConvertHTML is designed with privacy as a core principle. We do <strong>not</strong> collect, store, or transmit any personal information, including:
           </p>
           <ul className="list-disc list-inside space-y-2 ml-4">
             <li>Names, email addresses, or contact information</li>
@@ -61,14 +71,14 @@ export default function Privacy() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">4. Third-Party Services</h3>
           <p className="mb-4">
-            Word HTML Editor does not integrate with any third-party analytics, advertising, or tracking services. The only external resource loaded is Google Fonts for typography, which is subject to Google's own privacy policy.
+            WordConvertHTML does not integrate with any third-party analytics, advertising, or tracking services. The only external resource loaded is Google Fonts for typography, which is subject to Google's own privacy policy.
           </p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">5. Open Source</h3>
           <p className="mb-4">
-            Word HTML Editor is open source. You can verify our privacy claims by reviewing the source code. Transparency is fundamental to our commitment to user privacy.
+            WordConvertHTML is open source. You can verify our privacy claims by reviewing the source code. Transparency is fundamental to our commitment to user privacy.
           </p>
         </div>
 

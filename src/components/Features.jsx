@@ -69,7 +69,7 @@ export default function Features() {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-400 rounded-full mx-auto mb-4" />
           <p className="text-slate-600 dark:text-surface-400 max-w-2xl mx-auto text-lg">
-            Everything you need to convert Word documents to clean, production-ready HTML.
+            Everything you need to convert Word documents to clean, production-ready HTML at wordconverthtml.com.
           </p>
         </div>
 

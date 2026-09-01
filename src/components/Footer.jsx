@@ -12,10 +12,10 @@ export default function Footer() {
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 mb-8">
           <div className="sm:col-span-2 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <Logo size="sm" />
+              <Logo size="md" />
             </div>
             <p className="text-slate-600 dark:text-surface-400 text-sm leading-relaxed max-w-sm mb-4">
-              Free online tool to convert Word documents to clean, semantic HTML.
+              Free online tool to convert Word documents to clean, semantic HTML at wordconverthtml.com.
               Your content stays private — everything runs in your browser.
             </p>
             <div className="flex items-center gap-2">
@@ -41,6 +41,9 @@ export default function Footer() {
                 <Link to="/contact" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact Us</Link>
               </li>
               <li>
+                <Link to="/blog" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Blog</Link>
+              </li>
+              <li>
                 <Link to="/terms" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Terms of Use</Link>
               </li>
               <li>
@@ -52,9 +55,10 @@ export default function Footer() {
 
         <div className="border-t border-slate-200 dark:border-surface-800 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-slate-500 dark:text-surface-500 text-sm">
-            &copy; {new Date().getFullYear()} WordHTML Editor. All rights reserved.
+            &copy; {new Date().getFullYear()} WordConvertHTML. All rights reserved.
           </p>
           <div className="flex items-center gap-4 text-xs text-slate-400 dark:text-surface-600">
+            <Link to="/blog" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Blog</Link>
             <Link to="/terms" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Terms</Link>
             <Link to="/privacy" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Privacy</Link>
             <Link to="/contact" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact</Link>

@@ -1,0 +1,22 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="450">
+      <stop offset="0%" stop-color="#0ea5e9"/>
+      <stop offset="100%" stop-color="#075985"/>
+    </linearGradient>
+  </defs>
+  <circle cx="680" cy="100" r="70" fill="#EFEF4B" opacity="0.12"/>
+  <circle cx="110" cy="360" r="80" fill="#ffffff" opacity="0.08"/>
+  <g transform="translate(250,60)">
+    <rect x="0" y="0" width="300" height="330" rx="16" fill="#ffffff" opacity="0.15"/>
+    <rect x="30" y="30" width="240" height="60" rx="10" fill="#ffffff" opacity="0.2"/>
+    <rect x="110" y="52" width="80" height="16" rx="8" fill="#EFEF4B"/>
+    <rect x="30" y="110" width="240" height="14" rx="7" fill="#ffffff" opacity="0.3"/>
+    <rect x="30" y="135" width="200" height="14" rx="7" fill="#ffffff" opacity="0.3"/>
+    <rect x="30" y="175" width="240" height="80" rx="10" fill="#0E5952" opacity="0.8"/>
+    <text x="150" y="225" text-anchor="middle" fill="#EFEF4B" font-size="26" font-weight="800" font-family="Inter, sans-serif">🔒 100% PRIVATE</text>
+    <rect x="30" y="275" width="240" height="14" rx="7" fill="#ffffff" opacity="0.3"/>
+    <rect x="30" y="300" width="180" height="14" rx="7" fill="#ffffff" opacity="0.3"/>
+  </g>
+</svg>

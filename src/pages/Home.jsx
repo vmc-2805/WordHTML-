@@ -7,9 +7,16 @@ import HowItWorks from '../components/HowItWorks';
 import WhyChooseUs from '../components/WhyChooseUs';
 import FAQ from '../components/FAQ';
 import CTA from '../components/CTA';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Home() {
   const location = useLocation();
+
+  useSEO({
+    title: 'Word to HTML Converter - Free Online Tool | WordConvertHTML',
+    description: 'Free online Word to HTML converter. Paste your Word document content, get clean, semantic HTML instantly. No installation, no sign-up. 100% private — runs in your browser.',
+    canonical: 'https://wordconverthtml.com'
+  });
 
   useEffect(() => {
     if (location.hash) {

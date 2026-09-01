@@ -45,8 +45,7 @@ export default function Hero() {
         {/* Badge */}
         <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary-500/10 border border-primary-500/20 mb-6 sm:mb-8 transition-all duration-700 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
           <Sparkles className="w-4 h-4 text-primary-500 dark:text-primary-400 animate-pulse" />
-          <span className="text-sm text-primary-600 dark:text-primary-300 font-medium">Free Online Word to HTML Converter</span>
-        </div>
+          <span className="text-sm text-primary-600 dark:text-primary-300 font-medium">Free Online Word to HTML Converter</span>        </div>
 
         {/* Heading with typing effect */}
         <h1 className={`text-4xl sm:text-5xl lg:text-7xl font-bold mb-4 sm:mb-6 transition-all duration-700 delay-200 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
@@ -61,8 +60,8 @@ export default function Hero() {
 
         {/* Subheading */}
         <p className={`text-lg sm:text-xl text-slate-600 dark:text-surface-400 max-w-2xl mx-auto mb-8 sm:mb-10 transition-all duration-700 delay-400 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          Paste your Word content, get clean, semantic HTML. No installation required.
-          Free, fast, and secure.
+          Paste your Word content, get clean, semantic HTML. Free, fast, and secure —
+          no installation, no sign-up, and everything runs in your browser.
         </p>
 
         {/* CTA Buttons */}

@@ -5,13 +5,13 @@ import { useStaggerReveal } from '../hooks/useScrollReveal'
 const faqData = [
   {
     category: 'General',
-    question: 'What is Word HTML Editor?',
-    answer: 'Word HTML Editor is a free online tool that lets you convert Word documents to clean, semantic HTML code. You can paste content directly from Microsoft Word or upload .docx files, edit them in a WYSIWYG editor, and export clean HTML.'
+    question: 'What is WordConvertHTML?',
+    answer: 'WordConvertHTML is a free online tool that lets you convert Word documents to clean, semantic HTML code. You can paste content directly from Microsoft Word or upload .docx files, edit them in a WYSIWYG editor, and export clean HTML — all at wordconverthtml.com.'
   },
   {
     category: 'General',
-    question: 'Is this tool free to use?',
-    answer: 'Yes, Word HTML Editor is completely free to use with no sign-up required. There are no hidden fees or premium tiers. All features are available to everyone.'
+    question: 'Is this Word to HTML tool free to use?',
+    answer: 'Yes, WordConvertHTML is completely free to use with no sign-up required. There are no hidden fees or premium tiers. All features are available to everyone.'
   },
   {
     category: 'How to Use',
@@ -36,7 +36,7 @@ const faqData = [
   {
     category: 'Privacy',
     question: 'Can I use this on mobile devices?',
-    answer: 'Yes, Word HTML Editor is fully responsive and works on all devices including smartphones and tablets. However, for the best editing experience, we recommend using a desktop browser.'
+    answer: 'Yes, WordConvertHTML is fully responsive and works on all devices including smartphones and tablets. However, for the best editing experience, we recommend using a desktop browser.'
   }
 ]
 
@@ -140,7 +140,7 @@ export default function FAQ() {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-400 rounded-full mx-auto mb-4" />
           <p className="text-lg text-slate-600 dark:text-surface-400 max-w-xl mx-auto">
-            Everything you need to know about Word HTML Editor.
+            Everything you need to know about WordConvertHTML — the free Word to HTML converter.
           </p>
 
         </div>

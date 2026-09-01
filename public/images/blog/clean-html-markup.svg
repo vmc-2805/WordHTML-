@@ -1,0 +1,21 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="450">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+  </defs>
+  <circle cx="650" cy="100" r="70" fill="#EFEF4B" opacity="0.12"/>
+  <circle cx="130" cy="370" r="90" fill="#3fa89e" opacity="0.15"/>
+  <rect x="200" y="80" width="400" height="60" rx="12" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="220" y="122" fill="#EFEF4B" font-size="24" font-weight="700" font-family="Inter, sans-serif">&lt;html&gt;</text>
+  <rect x="240" y="160" width="320" height="50" rx="10" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="260" y="193" fill="#3fa89e" font-size="20" font-weight="600" font-family="Inter, sans-serif">&lt;body&gt;</text>
+  <rect x="280" y="230" width="240" height="40" rx="10" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="300" y="257" fill="#a1dbd4" font-size="18" font-family="Inter, sans-serif">&lt;p&gt;Hello!&lt;/p&gt;</text>
+  <rect x="280" y="290" width="240" height="40" rx="10" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="300" y="317" fill="#f1f5f9" font-size="18" font-family="Inter, sans-serif">&lt;strong&gt;Bold&lt;/strong&gt;</text>
+  <rect x="240" y="350" width="320" height="50" rx="10" fill="#1e293b" stroke="#475569" stroke-width="2"/>
+  <text x="260" y="383" fill="#3fa89e" font-size="20" font-weight="600" font-family="Inter, sans-serif">&lt;/body&gt;</text>
+</svg>

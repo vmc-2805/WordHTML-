@@ -49,7 +49,7 @@ export default function HowItWorks() {
           </h2>
           <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-400 rounded-full mx-auto mb-4" />
           <p className="text-slate-600 dark:text-surface-400 max-w-2xl mx-auto text-lg">
-            Three simple steps to convert your Word content to clean HTML.
+            Three simple steps to convert your Word content to clean HTML online.
           </p>
         </div>
 

@@ -1,0 +1,22 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="450">
+      <stop offset="0%" stop-color="#8b5cf6"/>
+      <stop offset="100%" stop-color="#4c1d95"/>
+    </linearGradient>
+  </defs>
+  <circle cx="650" cy="90" r="70" fill="#EFEF4B" opacity="0.12"/>
+  <circle cx="120" cy="370" r="80" fill="#ffffff" opacity="0.08"/>
+  <g transform="translate(175,80)">
+    <rect x="0" y="0" width="450" height="290" rx="16" fill="#ffffff" opacity="0.15"/>
+    <rect x="40" y="40" width="370" height="60" rx="12" fill="#0E5952"/>
+    <text x="60" y="78" fill="#ffffff" font-size="24" font-weight="700" font-family="Inter, sans-serif">My Website</text>
+    <rect x="40" y="120" width="90" height="40" rx="8" fill="#EFEF4B"/>
+    <rect x="150" y="120" width="90" height="40" rx="8" fill="#3fa89e"/>
+    <rect x="260" y="120" width="90" height="40" rx="8" fill="#10b981"/>
+    <rect x="40" y="180" width="170" height="80" rx="10" fill="#f9f9c8" opacity="0.3"/>
+    <rect x="230" y="180" width="180" height="80" rx="10" fill="#d0ede9" opacity="0.3"/>
+  </g>
+  <text x="400" y="420" text-anchor="middle" fill="#ffffff" font-size="26" font-weight="700" font-family="Inter, sans-serif">Beautiful Web Content</text>
+</svg>

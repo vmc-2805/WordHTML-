@@ -1,0 +1,20 @@
+<svg width="800" height="450" viewBox="0 0 800 450" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="450" fill="url(#bg)"/>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="800" y2="450">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+  </defs>
+  <circle cx="130" cy="90" r="70" fill="#EFEF4B" opacity="0.15"/>
+  <circle cx="690" cy="360" r="80" fill="#ffffff" opacity="0.08"/>
+  <g transform="translate(310,60)">
+    <circle cx="90" cy="90" r="70" fill="#0E5952" opacity="0.85"/>
+    <text x="90" y="102" text-anchor="middle" fill="#EFEF4B" font-size="30" font-weight="700" font-family="Inter, sans-serif">1</text>
+    <circle cx="90" cy="220" r="70" fill="#3fa89e" opacity="0.85"/>
+    <text x="90" y="232" text-anchor="middle" fill="#ffffff" font-size="30" font-weight="700" font-family="Inter, sans-serif">9</text>
+    <path d="M90 165 L330 165" stroke="#EFEF4B" stroke-width="3" stroke-dasharray="8 8" opacity="0.6"/>
+    <rect x="270" y="130" width="120" height="40" rx="10" fill="#EFEF4B"/>
+    <text x="330" y="157" text-anchor="middle" fill="#0E5952" font-size="18" font-weight="700" font-family="Inter, sans-serif">TOOLS</text>
+  </g>
+</svg>

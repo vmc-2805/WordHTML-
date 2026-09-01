@@ -1,15 +1,25 @@
-import { FileText, ArrowLeft, Calendar } from 'lucide-react';
+import { FileText, Calendar } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import PageLayout from './PageLayout';
+import Breadcrumbs from '../components/Breadcrumbs';
+import { useSEO } from '../hooks/useSEO';
 
 export default function Terms() {
+  useSEO({
+    title: 'Terms of Use | WordConvertHTML',
+    description: 'Read the Terms of Use for WordConvertHTML - the free online Word to HTML converter at wordconverthtml.com.',
+    canonical: 'https://wordconverthtml.com/terms'
+  });
   return (
     <PageLayout title="Terms of Use" icon={FileText}>
       <div className="space-y-8 text-slate-700 dark:text-surface-300 text-sm sm:text-base leading-relaxed">
         {/* Back link */}
-        <Link to="/" className="inline-flex items-center gap-2 text-primary-500 hover:text-primary-600 dark:text-primary-400 dark:hover:text-primary-300 font-medium transition-colors mb-4">
-          <ArrowLeft className="w-4 h-4" /> Back to Home
-        </Link>
+        <Breadcrumbs
+          items={[
+            { label: 'Home', to: '/' },
+            { label: 'Terms of Use' }
+          ]}
+        />
 
         <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-surface-500">
           <Calendar className="w-3.5 h-3.5" />
@@ -19,14 +29,14 @@ export default function Terms() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">1. Acceptance of Terms</h3>
           <p className="mb-4">
-            By accessing and using Word HTML Editor ("the Service"), you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, you may not use the Service.
+                By accessing and using WordConvertHTML ("the Service"), you agree to be bound by these Terms of Use. If you do not agree with any part of these terms, you may not use the Service.
           </p>
         </div>
 
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">2. Description of Service</h3>
           <p className="mb-4">
-            Word HTML Editor is a free, browser-based tool that allows users to convert Word documents and rich text content into clean, semantic HTML code. The Service operates entirely client-side within your web browser.
+            WordConvertHTML is a free, browser-based Word to HTML converter that allows users to convert Word documents and rich text content into clean, semantic HTML code. The Service operates entirely client-side within your web browser.
           </p>
         </div>
 
@@ -43,7 +53,7 @@ export default function Terms() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">4. Intellectual Property</h3>
           <p className="mb-4">
-            The Service, including its design, code, and features, is owned by Word HTML Editor and protected by intellectual property laws. You may not copy, modify, distribute, or reverse-engineer any part of the Service without explicit written permission.
+            The Service, including its design, code, and features, is owned by WordConvertHTML and protected by intellectual property laws. You may not copy, modify, distribute, or reverse-engineer any part of the Service without explicit written permission.
           </p>
         </div>
 
@@ -64,7 +74,7 @@ export default function Terms() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">7. Limitation of Liability</h3>
           <p className="mb-4">
-            In no event shall Word HTML Editor be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the Service.
+            In no event shall WordConvertHTML be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of or inability to use the Service.
           </p>
         </div>
 
