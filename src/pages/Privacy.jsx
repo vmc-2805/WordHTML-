@@ -1,5 +1,4 @@
 import { Shield, Calendar, Lock, Eye, Database, Globe } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import PageLayout from './PageLayout';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useSEO } from '../hooks/useSEO';
@@ -99,8 +98,8 @@ export default function Privacy() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">8. Contact</h3>
           <p>
-            If you have questions about this Privacy Policy, please visit our{' '}
-            <Link to="/contact" className="text-primary-500 hover:text-primary-600 dark:text-primary-400 underline">Contact page</Link>.
+            If you have questions about this Privacy Policy, please contact us at{' '}
+            <span className="text-primary-500 dark:text-primary-400">support@wordconverthtml.com</span>.
           </p>
         </div>
       </div>

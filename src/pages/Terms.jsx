@@ -1,5 +1,4 @@
 import { FileText, Calendar } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import PageLayout from './PageLayout';
 import Breadcrumbs from '../components/Breadcrumbs';
 import { useSEO } from '../hooks/useSEO';
@@ -88,8 +87,8 @@ export default function Terms() {
         <div>
           <h3 className="text-lg font-semibold text-slate-900 dark:text-white mb-3">9. Contact</h3>
           <p>
-            If you have questions about these Terms of Use, please contact us through our{' '}
-            <Link to="/contact" className="text-primary-500 hover:text-primary-600 dark:text-primary-400 underline">Contact page</Link>.
+            If you have questions about these Terms of Use, please contact us at{' '}
+            <span className="text-primary-500 dark:text-primary-400">support@wordconverthtml.com</span>.
           </p>
         </div>
       </div>

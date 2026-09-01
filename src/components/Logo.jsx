@@ -1,7 +1,7 @@
 export default function Logo({ size = 'md', className = '' }) {
   const sizes = {
     sm: { width: 'w-24' },
-    md: { width: 'w-40' },
+    md: { width: 'w-52' },
     lg: { width: 'w-52' },
   };
   const s = sizes[size] || sizes.md;

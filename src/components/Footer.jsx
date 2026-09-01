@@ -38,9 +38,6 @@ export default function Footer() {
             <h3 className="font-semibold text-slate-900 dark:text-white mb-4 text-sm">Quick Links</h3>
             <ul className="space-y-2.5 text-sm">
               <li>
-                <Link to="/contact" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact Us</Link>
-              </li>
-              <li>
                 <Link to="/blog" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Blog</Link>
               </li>
               <li>
@@ -61,7 +58,6 @@ export default function Footer() {
             <Link to="/blog" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Blog</Link>
             <Link to="/terms" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Terms</Link>
             <Link to="/privacy" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Privacy</Link>
-            <Link to="/contact" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Contact</Link>
           </div>
         </div>
       </div>
