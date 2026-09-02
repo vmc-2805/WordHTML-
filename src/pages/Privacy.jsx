@@ -1,6 +1,5 @@
-import { Shield, Calendar, Lock, Eye, Database, Globe } from 'lucide-react';
+import { Calendar, Lock, Database, Globe } from 'lucide-react';
 import PageLayout from './PageLayout';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { useSEO } from '../hooks/useSEO';
 
 export default function Privacy() {
@@ -10,15 +9,15 @@ export default function Privacy() {
     canonical: 'https://wordconverthtml.com/privacy'
   });
   return (
-    <PageLayout title="Privacy Policy" icon={Shield}>
+    <PageLayout
+      title="Privacy Policy"
+      description="Your privacy matters. All processing happens entirely in your browser — we collect nothing and store nothing on servers."
+      breadcrumbs={[
+        { label: 'Home', to: '/' },
+        { label: 'Privacy Policy' }
+      ]}
+    >
       <div className="space-y-8 text-slate-700 dark:text-surface-300 text-sm sm:text-base leading-relaxed">
-        <Breadcrumbs
-          items={[
-            { label: 'Home', to: '/' },
-            { label: 'Privacy Policy' }
-          ]}
-        />
-
         <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-surface-500">
           <Calendar className="w-3.5 h-3.5" />
           Last updated: August 20, 2026

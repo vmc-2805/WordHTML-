@@ -2,7 +2,7 @@ import { Calendar, ArrowRight, User, Clock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useSEO } from '../hooks/useSEO';
 import { blogPosts } from '../data/blogPosts';
-import Breadcrumbs from '../components/Breadcrumbs';
+import PageHeader from '../components/PageHeader';
 
 export default function Blog() {
   useSEO({
@@ -18,20 +18,15 @@ export default function Blog() {
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Header */}
-        <div className="text-center mb-12 lg:mb-16">
-          <Breadcrumbs
+        <div className="mb-12 lg:mb-16">
+          <PageHeader
             items={[
               { label: 'Home', to: '/' },
               { label: 'Blog' }
             ]}
+            title="WordConvertHTML Blog"
+            description="Tips, tutorials, and guides to convert Word to HTML, clean your markup, and improve web content."
           />
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mb-3">
-            WordConvertHTML <span className="text-primary-500 dark:text-primary-400">Blog</span>
-          </h1>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-400 rounded-full mx-auto mb-4" />
-          <p className="text-slate-600 dark:text-surface-400 max-w-2xl mx-auto text-lg">
-            Tips, tutorials, and guides to convert Word to HTML, clean your markup, and improve web content.
-          </p>
         </div>
 
         {/* Blog Cards Grid */}

@@ -197,19 +197,8 @@ export default function EditorSection() {
   }
 
   return (
-    <section id="editor" className="py-16 sm:py-20 lg:py-24 bg-slate-50 dark:bg-surface-950">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-10 sm:mb-12">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 dark:text-white mb-3">
-            Editor
-          </h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary-500 to-accent-400 rounded-full mx-auto mb-4" />
-          <p className="text-lg text-slate-600 dark:text-surface-400 max-w-2xl mx-auto">
-            Paste your Word content or edit HTML directly. Real-time two-way sync.
-          </p>
-        </div>
-
-        <div className="rounded-2xl border border-slate-200 dark:border-surface-700/50 bg-white dark:bg-surface-900/50 shadow-xl shadow-slate-200/50 dark:shadow-black/20 overflow-hidden backdrop-blur-sm">
+    <section id="editor">
+      <div className="rounded-2xl border border-slate-200 dark:border-surface-700/50 bg-white dark:bg-surface-900/50 shadow-xl shadow-slate-200/50 dark:shadow-black/20 overflow-hidden backdrop-blur-sm">
 
           <MenuToolbar
             activeTab={activeTab}
@@ -359,7 +348,6 @@ export default function EditorSection() {
             </div>
           </div>
         </div>
-      </div>
     </section>
   )
 }

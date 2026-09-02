@@ -1,4 +1,5 @@
 ﻿import { ArrowRight, Zap, WandSparkles } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import { useScrollReveal } from '../hooks/useScrollReveal'
 
 export default function CTA() {
@@ -49,14 +50,14 @@ export default function CTA() {
             <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-500 ${
               isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}>
-              <a
-                href="#editor"
+              <Link
+                to="/editor"
                 className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-primary-600 font-bold hover:bg-slate-50 transition-all duration-300 transform hover:scale-105 shadow-xl shadow-black/20"
               >
                 <WandSparkles className="w-5 h-5 transition-transform group-hover:rotate-12" />
                 Open Editor
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </a>
+              </Link>
             </div>
           </div>
         </div>

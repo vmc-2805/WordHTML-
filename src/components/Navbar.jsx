@@ -53,6 +53,16 @@ export default function Navbar({ darkMode, setDarkMode }) {
               </button>
             ))}
             <Link
+              to="/editor"
+              className={`text-sm font-medium transition-colors ${
+                isActive('/editor')
+                  ? 'text-primary-500 dark:text-primary-400'
+                  : 'text-slate-600 dark:text-surface-300 hover:text-primary-500 dark:hover:text-white'
+              }`}
+            >
+              Editor
+            </Link>
+            <Link
               to="/blog"
               className={`text-sm font-medium transition-colors ${
                 isActive('/blog')
@@ -93,6 +103,13 @@ export default function Navbar({ darkMode, setDarkMode }) {
                 {link.label}
               </button>
             ))}
+            <Link
+              to="/editor"
+              onClick={() => setMobileMenuOpen(false)}
+              className="block w-full text-left py-2 text-slate-600 dark:text-surface-300 hover:text-primary-500 dark:hover:text-white transition-colors"
+            >
+              Editor
+            </Link>
             <Link
               to="/blog"
               onClick={() => setMobileMenuOpen(false)}

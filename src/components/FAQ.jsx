@@ -1,4 +1,5 @@
 ﻿import { useState, useRef, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 import { ChevronDown, HelpCircle, MessageCircle, ArrowRight } from 'lucide-react'
 import { useStaggerReveal } from '../hooks/useScrollReveal'
 
@@ -170,14 +171,14 @@ export default function FAQ() {
           <p className="text-slate-500 dark:text-surface-400 text-sm mb-3">
             Still have questions?
           </p>
-          <a
-            href="#editor"
+          <Link
+            to="/editor"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-primary-500 text-white font-semibold text-sm hover:bg-primary-600 transition-all duration-300 hover:shadow-lg hover:shadow-primary-500/25 hover:scale-105"
           >
             <MessageCircle className="w-4 h-4" />
             Try It Yourself
             <ArrowRight className="w-4 h-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </section>

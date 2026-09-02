@@ -1,6 +1,5 @@
-import { FileText, Calendar } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import PageLayout from './PageLayout';
-import Breadcrumbs from '../components/Breadcrumbs';
 import { useSEO } from '../hooks/useSEO';
 
 export default function Terms() {
@@ -10,16 +9,15 @@ export default function Terms() {
     canonical: 'https://wordconverthtml.com/terms'
   });
   return (
-    <PageLayout title="Terms of Use" icon={FileText}>
+    <PageLayout
+      title="Terms of Use"
+      description="Please read these terms carefully before using WordConvertHTML. By accessing or using the service, you agree to be bound by these terms."
+      breadcrumbs={[
+        { label: 'Home', to: '/' },
+        { label: 'Terms of Use' }
+      ]}
+    >
       <div className="space-y-8 text-slate-700 dark:text-surface-300 text-sm sm:text-base leading-relaxed">
-        {/* Back link */}
-        <Breadcrumbs
-          items={[
-            { label: 'Home', to: '/' },
-            { label: 'Terms of Use' }
-          ]}
-        />
-
         <div className="flex items-center gap-2 text-xs text-slate-400 dark:text-surface-500">
           <Calendar className="w-3.5 h-3.5" />
           Last updated: August 20, 2026

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowDown, FileCode, Zap } from 'lucide-react';
 
 export default function Hero() {
@@ -66,14 +67,14 @@ export default function Hero() {
 
         {/* CTA Buttons */}
         <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-500 ${loaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-          <a
-            href="#editor"
+          <Link
+            to="/editor"
             className="group inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-gradient-to-r from-primary-500 to-primary-600 text-white font-semibold hover:from-primary-600 hover:to-primary-700 transition-all duration-300 transform hover:scale-105 shadow-lg shadow-primary-500/25 hover:shadow-xl hover:shadow-primary-500/30 animate-pulse-glow"
           >
             <Zap className="w-5 h-5 transition-transform group-hover:rotate-12" />
             Start Editing
             <ArrowDown className="w-5 h-5 transition-transform group-hover:translate-y-1" />
-          </a>
+          </Link>
           <a
             href="#features"
             className="inline-flex items-center gap-2 px-8 py-4 rounded-xl border-2 border-slate-200 dark:border-surface-700 text-slate-700 dark:text-surface-300 font-semibold hover:border-primary-300 dark:hover:border-primary-500 hover:text-primary-600 dark:hover:text-primary-400 transition-all duration-300 hover:shadow-lg"

@@ -2,7 +2,7 @@ import { Link, useParams, Navigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight, User, Clock, Tag, Share2 } from 'lucide-react';
 import { useSEO } from '../hooks/useSEO';
 import { blogPosts } from '../data/blogPosts';
-import Breadcrumbs from '../components/Breadcrumbs';
+import PageHeader from '../components/PageHeader';
 
 export default function BlogPost() {
   const { slug } = useParams();
@@ -39,15 +39,19 @@ export default function BlogPost() {
       <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Breadcrumbs */}
-        <Breadcrumbs
-          items={[
-            { label: 'Home', to: '/' },
-            { label: 'Blog', to: '/blog' },
-            { label: post.category }
-          ]}
-        />
+        <div className="mb-6">
+          <PageHeader
+            items={[
+              { label: 'Home', to: '/' },
+              { label: 'Blog', to: '/blog' },
+              { label: post.category }
+            ]}
+            title={post.title}
+            description={post.excerpt}
+          />
+        </div>
 
         {/* Article Header */}
         <header className="mb-8">
