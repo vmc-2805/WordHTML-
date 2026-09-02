@@ -1,29 +1,34 @@
 # WordConvertHTML
 
+> Free online Word to HTML converter. Paste your Word document content, get clean, semantic HTML instantly. No installation, no sign-up. 100% private — runs in your browser.
+
 ## About
-WordConvertHTML is a free, browser-based tool that converts Microsoft Word documents and rich text content into clean, semantic HTML code. It runs entirely client-side — no data is ever sent to a server.
+
+- [WordConvertHTML](https://wordconverthtml.com): Free, browser-based tool that converts Microsoft Word documents and rich text content into clean, semantic HTML. Runs entirely client-side, so no data ever leaves your device.
 
 ## Features
-- Word to HTML conversion with real-time preview
-- Automatic cleaning of Word-specific markup and inline styles
-- Semantic HTML output (strong/em instead of b/i)
-- Export as HTML file, copy to clipboard, or print
-- 9 individual cleaning tools (remove styles, classes, IDs, comments, etc.)
-- Dark mode support
-- Fully responsive design
+
+- [Word to HTML conversion](https://wordconverthtml.com): Paste Word content or upload .docx, get clean HTML with real-time preview
+- [Automatic cleaning](https://wordconverthtml.com): Removes Word-specific markup and inline styles automatically
+- [Semantic HTML output](https://wordconverthtml.com): Uses strong/em instead of b/i for clean, semantic markup
+- [Export options](https://wordconverthtml.com): Export as HTML file, copy to clipboard, or print
+- [9 cleaning tools](https://wordconverthtml.com): Remove styles, classes, IDs, comments, whitespace, and more
+- [Dark mode](https://wordconverthtml.com): Fully responsive design with dark mode support
 
 ## How It Works
-1. Paste Word content into the editor or upload a .docx file
-2. The editor auto-converts and cleans the HTML
-3. Use cleaning tools to further refine the output
-4. Export clean HTML via copy, download, or print
+
+- [Paste or upload](https://wordconverthtml.com): Paste Word content into the editor or upload a .docx file
+- [Auto-convert](https://wordconverthtml.com): The editor auto-converts and cleans the HTML
+- [Refine](https://wordconverthtml.com): Use cleaning tools to further refine the output
+- [Export](https://wordconverthtml.com): Export clean HTML via copy, download, or print
 
 ## Privacy
-All processing happens in the browser. No data leaves the user's device. No cookies, no analytics, no tracking.
+
+- [Privacy](https://wordconverthtml.com/privacy): All processing happens in the browser. No data leaves your device. No cookies, no analytics, no tracking.
 
 ## Links
-- Homepage: https://wordconverthtml.com
-- Blog: https://wordconverthtml.com/blog
-- Contact: https://wordconverthtml.com/contact
-- Terms of Use: https://wordconverthtml.com/terms
-- Privacy Policy: https://wordconverthtml.com/privacy
+
+- [Homepage](https://wordconverthtml.com)
+- [Blog](https://wordconverthtml.com/blog)
+- [Terms of Use](https://wordconverthtml.com/terms)
+- [Privacy Policy](https://wordconverthtml.com/privacy)
