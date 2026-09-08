@@ -11,7 +11,7 @@ export default function PageLayout({ title, description, breadcrumbs, children }
 
   return (
     <section className="pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 min-h-screen">
-      <div ref={ref} className={`max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+      <div ref={ref} className={`max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
         {/* Header */}
         <div className="mb-10 sm:mb-14">
           <PageHeader items={breadcrumbs} title={title} description={description} />

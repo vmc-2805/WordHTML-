@@ -4,6 +4,7 @@ Disallow: /api/
 Disallow: /admin/
 
 Sitemap: https://wordconverthtml.com/sitemap.xml
+# LLMs data available at: https://wordconverthtml.com/llms.txt
 
 User-agent: GPTBot
 Allow: /

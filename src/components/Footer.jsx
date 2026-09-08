@@ -44,6 +44,9 @@ export default function Footer() {
                 <Link to="/terms" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Terms of Use</Link>
               </li>
               <li>
+                <Link to="/sitemap" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Sitemap</Link>
+              </li>
+              <li>
                 <Link to="/privacy" className="text-slate-500 dark:text-surface-400 hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Privacy Policy</Link>
               </li>
             </ul>
@@ -58,6 +61,7 @@ export default function Footer() {
             <Link to="/blog" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Blog</Link>
             <Link to="/terms" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Terms</Link>
             <Link to="/privacy" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Privacy</Link>
+            <Link to="/sitemap" className="hover:text-primary-500 dark:hover:text-primary-400 transition-colors">Sitemap</Link>
           </div>
         </div>
       </div>
