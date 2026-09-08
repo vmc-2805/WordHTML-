@@ -28,7 +28,14 @@ const WordEditor = forwardRef(function WordEditor({ onInput, onKeyUp, onClick, i
       cleaned = cleaned.replace(/<font[^>]*>([\s\S]*?)<\/font>/gi, '$1')
       cleaned = cleaned.replace(/mso-[^:]*:[^;"]*;?/gi, '')
       cleaned = cleaned.replace(/class="MsoNormal"/gi, '')
-      cleaned = cleaned.replace(/\s*style="[^"]*"/gi, '')
+      cleaned = cleaned.replace(/\s*style="([^"]*)"/gi, (m, styleText) => {
+        const kept = styleText.split(';').map((s) => s.trim()).filter(Boolean).filter((s) => {
+          const prop = s.split(':')[0].trim().toLowerCase()
+          if (/^mso-/.test(prop)) return false
+          return ['color', 'background-color', 'background'].includes(prop)
+        })
+        return kept.length ? ` style="${kept.join('; ')}"` : ''
+      })
       cleaned = cleaned.replace(/<span[^>]*>\s*<\/span>/gi, '')
       document.execCommand('insertHTML', false, cleaned)
     } else {

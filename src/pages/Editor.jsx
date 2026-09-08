@@ -1,5 +1,4 @@
 import EditorSection from '../components/EditorSection';
-import PageHeader from '../components/PageHeader';
 import { useSEO } from '../hooks/useSEO';
 
 export default function Editor() {
@@ -10,22 +9,8 @@ export default function Editor() {
   });
 
   return (
-    <section className="pt-24 pb-16 sm:pt-28 sm:pb-20 lg:pt-32 lg:pb-24 min-h-screen bg-slate-50 dark:bg-surface-950 relative overflow-hidden">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-500/5 rounded-full blur-3xl pointer-events-none" />
-
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="mb-10 sm:mb-12">
-          <PageHeader
-            items={[
-              { label: 'Home', to: '/' },
-              { label: 'Editor' }
-            ]}
-            title="Word to HTML Editor"
-            description="Paste your Word content or edit HTML directly. Real-time two-way sync."
-          />
-        </div>
-
+    <section className="pt-16 h-[calc(100vh-4rem)] bg-slate-50 dark:bg-surface-950 overflow-hidden">
+      <div className="h-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
         <EditorSection />
       </div>
     </section>

@@ -61,6 +61,10 @@
   .word-editor-content h3 { font-size: 1.25em; font-weight: 600; margin: 0.5em 0; }
   .word-editor-content p { margin: 0.5em 0; }
   .word-editor-content ul, .word-editor-content ol { margin: 0.5em 0; padding-left: 2em; }
+  .word-editor-content ul { list-style: disc; }
+  .word-editor-content ol { list-style: decimal; }
+  .word-editor-content ul ul { list-style: circle; }
+  .word-editor-content ol ol { list-style: lower-alpha; }
   .word-editor-content li { margin: 0.25em 0; }
   .word-editor-content table { border-collapse: collapse; width: 100%; margin: 0.5em 0; }
   .word-editor-content table td, .word-editor-content table th { border: 1px solid #d1d5db; padding: 8px 12px; text-align: left; }

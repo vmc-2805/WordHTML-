@@ -5,6 +5,7 @@
   Heading1, Heading2, Heading3, Minus,
   Undo2, Redo2
 } from 'lucide-react'
+import { useRef, useEffect } from 'react'
 
 const ToolButton = ({ onClick, title, children, active }) => (
   <div className="tooltip-wrapper">
@@ -22,6 +23,24 @@ const ToolButton = ({ onClick, title, children, active }) => (
 const Divider = () => <div className="toolbar-divider" />
 
 export default function EditorToolbar({ editorRef }) {
+  const savedRangeRef = useRef(null)
+
+  useEffect(() => {
+    const save = () => {
+      const el = editorRef?.current
+      if (!el) return
+      const sel = window.getSelection()
+      if (sel && sel.rangeCount > 0) {
+        const range = sel.getRangeAt(0)
+        if (el.contains(range.commonAncestorContainer)) {
+          savedRangeRef.current = range.cloneRange()
+        }
+      }
+    }
+    document.addEventListener('selectionchange', save)
+    return () => document.removeEventListener('selectionchange', save)
+  }, [editorRef])
+
   const exec = (cmd, val = null) => {
     document.execCommand(cmd, false, val)
     editorRef?.current?.focus()
@@ -48,15 +67,29 @@ export default function EditorToolbar({ editorRef }) {
     }
   }
 
-  const setColor = (color) => {
-    document.execCommand('foreColor', false, color)
+  const restoreSelection = () => {
+    const el = editorRef?.current
+    if (el) el.focus()
+    if (savedRangeRef.current) {
+      const sel = window.getSelection()
+      if (sel) {
+        sel.removeAllRanges()
+        sel.addRange(savedRangeRef.current)
+      }
+    }
+  }
+
+  const applyColorCommand = (cmd, color) => {
+    restoreSelection()
+    document.execCommand('styleWithCSS', false, true)
+    document.execCommand(cmd, false, color)
+    document.execCommand('styleWithCSS', false, false)
     editorRef?.current?.focus()
   }
 
-  const setHighlight = (color) => {
-    document.execCommand('hiliteColor', false, color)
-    editorRef?.current?.focus()
-  }
+  const setColor = (color) => applyColorCommand('foreColor', color)
+
+  const setHighlight = (color) => applyColorCommand('hiliteColor', color)
 
   const handleFontFamily = (e) => {
     document.execCommand('fontName', false, e.target.value)

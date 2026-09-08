@@ -197,8 +197,8 @@ export default function EditorSection() {
   }
 
   return (
-    <section id="editor">
-      <div className="rounded-2xl border border-slate-200 dark:border-surface-700/50 bg-white dark:bg-surface-900/50 shadow-xl shadow-slate-200/50 dark:shadow-black/20 overflow-hidden backdrop-blur-sm">
+    <section id="editor" className="h-full">
+      <div className="h-full rounded-2xl border border-slate-200 dark:border-surface-700/50 bg-white dark:bg-surface-900/50 shadow-xl shadow-slate-200/50 dark:shadow-black/20 overflow-hidden backdrop-blur-sm flex flex-col">
 
           <MenuToolbar
             activeTab={activeTab}
@@ -278,7 +278,7 @@ export default function EditorSection() {
             </div>
           </div>
 
-          <div className="h-[500px] relative">
+          <div className="flex-1 min-h-[400px] relative">
             <div className={activeTab === 'editor' ? 'h-full' : 'h-full hidden'}>
               <WordEditor
                 ref={editorRef}
