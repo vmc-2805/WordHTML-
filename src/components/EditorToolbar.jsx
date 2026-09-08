@@ -2,13 +2,11 @@
   Bold, Italic, Underline, Strikethrough,
   AlignLeft, AlignCenter, AlignRight, AlignJustify,
   List, ListOrdered, Link2, Image, Table, Code, Quote,
-  Heading1, Heading2, Heading3, Minus, Upload, Plus,
+  Heading1, Heading2, Heading3, Minus, Upload,
   Undo2, Redo2
 } from 'lucide-react'
 import { useRef, useEffect, useState } from 'react'
-
-const presetTextColors = ['#0f172a','#334155','#64748b','#111827','#dc2626','#ea580c','#ca8a04','#16a34a','#0d9488','#2563eb','#7c3aed','#db2777']
-const presetBgColors = ['#ffff00','#fef08a','#bfdbfe','#bbf7d0','#fecaca','#fed7aa','#e9d5ff','#fce7f3','#cffafe','#d1fae5','#e2e8f0','#f8fafc']
+import ColorPickerPanel from './ColorPickerPanel'
 
 const ToolButton = ({ onClick, title, children, active }) => (
   <div className="tooltip-wrapper">
@@ -30,6 +28,7 @@ export default function EditorToolbar({ editorRef }) {
   const imageInputRef = useRef(null)
   const [selColor, setSelColor] = useState('#0f172a')
   const [selBg, setSelBg] = useState('#ffff00')
+  const [bgOpacity, setBgOpacity] = useState(100)
 
   const rgbToHex = (rgb) => {
     if (!rgb || typeof rgb !== 'string') return null
@@ -78,6 +77,18 @@ export default function EditorToolbar({ editorRef }) {
   const [modal, setModal] = useState(null)
   const [modalValues, setModalValues] = useState({})
   const [colorPanel, setColorPanel] = useState(null)
+  const colorPanelRef = useRef(null)
+
+  useEffect(() => {
+    if (!colorPanel) return
+    const handleClickOutside = (e) => {
+      if (colorPanelRef.current && !colorPanelRef.current.contains(e.target)) {
+        setColorPanel(null)
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside)
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [colorPanel])
 
   const openModal = (type, initial = {}) => {
     setModalValues(initial)
@@ -173,9 +184,23 @@ export default function EditorToolbar({ editorRef }) {
     editorRef?.current?.focus()
   }
 
+  const hexToRgba = (hex, opacity) => {
+    const h = hex.replace('#', '')
+    const r = parseInt(h.substring(0, 2), 16)
+    const g = parseInt(h.substring(2, 4), 16)
+    const b = parseInt(h.substring(4, 6), 16)
+    return `rgba(${r},${g},${b},${opacity / 100})`
+  }
+
   const setColor = (color) => applyColorCommand('foreColor', color)
 
-  const setHighlight = (color) => applyColorCommand('hiliteColor', color)
+  const setHighlight = (color, opacity) => {
+    if (opacity !== undefined && opacity < 100) {
+      applyColorCommand('hiliteColor', hexToRgba(color, opacity))
+    } else {
+      applyColorCommand('hiliteColor', color)
+    }
+  }
 
   const saveSelectionNow = () => {
     const el = editorRef?.current
@@ -295,30 +320,12 @@ export default function EditorToolbar({ editorRef }) {
           </div>
 
           {colorPanel === 'text' && (
-            <div className="absolute top-full left-0 mt-1 z-[60] w-[188px] bg-white dark:bg-surface-800 border border-slate-200 dark:border-surface-700 rounded-xl shadow-xl p-2"
+            <div ref={colorPanelRef} className="absolute top-full left-0 mt-1 z-[60]"
               onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}>
-              <div className="grid grid-cols-6 gap-1.5">
-                {presetTextColors.map(c => (
-                  <button
-                    key={c}
-                    type="button"
-                    className="w-6 h-6 rounded-md border border-slate-200 dark:border-surface-600 hover:scale-110 transition-transform"
-                    style={{ backgroundColor: c }}
-                    onClick={() => { setColor(c); setColorPanel(null) }}
-                  />
-                ))}
-              </div>
-              <label className="mt-2 w-full inline-flex items-center justify-center gap-1 px-2 py-1 text-[10px] font-medium text-slate-500 dark:text-surface-400 border border-dashed border-slate-300 dark:border-surface-600 rounded-md cursor-pointer hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-500 transition-colors">
-                <Plus className="w-3 h-3" />
-                Custom
-                <input
-                  type="color"
-                  className="absolute w-0 h-0 opacity-0"
-                  value={selColor}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onChange={(e) => { setColor(e.target.value); setColorPanel(null) }}
-                />
-              </label>
+              <ColorPickerPanel
+                color={selColor}
+                onChange={(c) => { setSelColor(c); setColor(c) }}
+              />
             </div>
           )}
         </div>
@@ -338,30 +345,15 @@ export default function EditorToolbar({ editorRef }) {
           </div>
 
           {colorPanel === 'bg' && (
-            <div className="absolute top-full left-0 mt-1 z-[60] w-[188px] bg-white dark:bg-surface-800 border border-slate-200 dark:border-surface-700 rounded-xl shadow-xl p-2"
+            <div ref={colorPanelRef} className="absolute top-full left-0 mt-1 z-[60]"
               onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}>
-              <div className="grid grid-cols-6 gap-1.5">
-                {presetBgColors.map(c => (
-                  <button
-                    key={c}
-                    type="button"
-                    className="w-6 h-6 rounded-md border border-slate-200 dark:border-surface-600 hover:scale-110 transition-transform"
-                    style={{ backgroundColor: c }}
-                    onClick={() => { setHighlight(c); setColorPanel(null) }}
-                  />
-                ))}
-              </div>
-              <label className="mt-2 w-full inline-flex items-center justify-center gap-1 px-2 py-1 text-[10px] font-medium text-slate-500 dark:text-surface-400 border border-dashed border-slate-300 dark:border-surface-600 rounded-md cursor-pointer hover:text-primary-600 dark:hover:text-primary-400 hover:border-primary-500 transition-colors">
-                <Plus className="w-3 h-3" />
-                Custom
-                <input
-                  type="color"
-                  className="absolute w-0 h-0 opacity-0"
-                  value={selBg}
-                  onMouseDown={(e) => e.stopPropagation()}
-                  onChange={(e) => { setHighlight(e.target.value); setColorPanel(null) }}
-                />
-              </label>
+              <ColorPickerPanel
+                color={selBg}
+                onChange={(c) => { setSelBg(c); setHighlight(c, bgOpacity) }}
+                showOpacity
+                opacity={bgOpacity}
+                onOpacityChange={setBgOpacity}
+              />
             </div>
           )}
         </div>
