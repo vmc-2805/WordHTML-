@@ -86,9 +86,9 @@ const WordEditor = forwardRef(function WordEditor({ onInput, onKeyUp, onClick, i
   }, [handleInput])
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full overflow-hidden">
       <EditorToolbar editorRef={ref} />
-      <div className="flex-1 overflow-auto p-4">
+      <div className="flex-1 min-h-0 overflow-auto p-3 sm:p-4 md:p-6">
         <div
           ref={ref}
           className="word-editor-content text-slate-800 dark:text-slate-200"

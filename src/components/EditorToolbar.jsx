@@ -78,6 +78,9 @@ export default function EditorToolbar({ editorRef }) {
   const [modalValues, setModalValues] = useState({})
   const [colorPanel, setColorPanel] = useState(null)
   const colorPanelRef = useRef(null)
+  const colorTextBtnRef = useRef(null)
+  const colorBgBtnRef = useRef(null)
+  const [panelPos, setPanelPos] = useState({ left: 0, top: 0 })
 
   useEffect(() => {
     if (!colorPanel) return
@@ -217,6 +220,13 @@ export default function EditorToolbar({ editorRef }) {
   const openColorPanel = (type) => {
     saveSelectionNow()
     setColorPanel(prev => prev === type ? null : type)
+    const btnRef = type === 'text' ? colorTextBtnRef : colorBgBtnRef
+    const rect = btnRef.current?.getBoundingClientRect()
+    if (rect) {
+      const panelWidth = 248
+      const left = Math.min(rect.left, window.innerWidth - panelWidth - 8)
+      setPanelPos({ left: Math.max(8, left), top: rect.bottom + 6 })
+    }
   }
 
   const handleFontFamily = (e) => {
@@ -230,7 +240,7 @@ export default function EditorToolbar({ editorRef }) {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50">
+    <div className="flex items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50 overflow-x-auto whitespace-nowrap lg:flex-wrap lg:overflow-x-visible">
       <ToolButton onClick={() => exec('undo')} title="Undo">
         <Undo2 className="w-4 h-4" />
       </ToolButton>
@@ -307,6 +317,7 @@ export default function EditorToolbar({ editorRef }) {
         <div className="relative">
           <div className="tooltip-wrapper">
             <button
+              ref={colorTextBtnRef}
               type="button"
               className={`toolbar-btn ${colorPanel === 'text' ? 'active' : ''}`}
               title="Text Color"
@@ -320,7 +331,8 @@ export default function EditorToolbar({ editorRef }) {
           </div>
 
           {colorPanel === 'text' && (
-            <div ref={colorPanelRef} className="absolute top-full left-0 mt-1 z-[60]"
+            <div ref={colorPanelRef} className="fixed z-[60]"
+              style={{ left: panelPos.left, top: panelPos.top }}
               onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}>
               <ColorPickerPanel
                 color={selColor}
@@ -333,6 +345,7 @@ export default function EditorToolbar({ editorRef }) {
         <div className="relative">
           <div className="tooltip-wrapper">
             <button
+              ref={colorBgBtnRef}
               type="button"
               className={`toolbar-btn ${colorPanel === 'bg' ? 'active' : ''}`}
               title="Highlight / Background"
@@ -345,7 +358,8 @@ export default function EditorToolbar({ editorRef }) {
           </div>
 
           {colorPanel === 'bg' && (
-            <div ref={colorPanelRef} className="absolute top-full left-0 mt-1 z-[60]"
+            <div ref={colorPanelRef} className="fixed z-[60]"
+              style={{ left: panelPos.left, top: panelPos.top }}
               onMouseDown={(e) => { e.preventDefault(); e.stopPropagation() }}>
               <ColorPickerPanel
                 color={selBg}

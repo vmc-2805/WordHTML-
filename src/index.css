@@ -58,7 +58,9 @@
 }
 
 @layer components {
-  .word-editor-content { min-height: 400px; outline: none; line-height: 1.7; font-size: 15px; }
+  .word-editor-content { min-height: 320px; outline: none; line-height: 1.7; font-size: 15px; }
+  @media (min-width: 640px) { .word-editor-content { min-height: 400px; } }
+  @media (min-width: 1024px) { .word-editor-content { min-height: 500px; } }
   .word-editor-content:focus { outline: none; }
   .word-editor-content ::selection, .word-editor-content::selection { background: rgba(14, 89, 82, 0.28); color: inherit; }
   .dark .word-editor-content ::selection, .dark .word-editor-content::selection { background: rgba(63, 168, 158, 0.4); color: inherit; }

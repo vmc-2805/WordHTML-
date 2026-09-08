@@ -272,14 +272,14 @@ export default function EditorSection() {
           />
 
           {showFindReplace && (
-            <div className="flex items-center gap-2 px-4 py-2 bg-yellow-50 dark:bg-yellow-900/20 border-b border-yellow-200 dark:border-yellow-800">
+            <div className="flex flex-wrap items-center gap-2 px-3 sm:px-4 py-2 bg-yellow-50 dark:bg-yellow-900/20 border-b border-yellow-200 dark:border-yellow-800">
               <Search className="w-4 h-4 text-yellow-600 dark:text-yellow-400 shrink-0" />
               <input
                 type="text"
                 placeholder="Find..."
                 value={findText}
                 onChange={(e) => setFindText(e.target.value)}
-                className="flex-1 min-w-0 px-2 py-1 text-xs rounded border border-yellow-300 dark:border-yellow-700 bg-white dark:bg-surface-800 text-slate-800 dark:text-slate-200 outline-none focus:border-yellow-500"
+                className="flex-1 min-w-[100px] px-2 py-1 text-xs rounded border border-yellow-300 dark:border-yellow-700 bg-white dark:bg-surface-800 text-slate-800 dark:text-slate-200 outline-none focus:border-yellow-500"
                 onKeyDown={(e) => e.key === 'Enter' && handleFindReplace()}
               />
               <input
@@ -287,7 +287,7 @@ export default function EditorSection() {
                 placeholder="Replace with..."
                 value={replaceText}
                 onChange={(e) => setReplaceText(e.target.value)}
-                className="flex-1 min-w-0 px-2 py-1 text-xs rounded border border-yellow-300 dark:border-yellow-700 bg-white dark:bg-surface-800 text-slate-800 dark:text-slate-200 outline-none focus:border-yellow-500"
+                className="flex-1 min-w-[100px] px-2 py-1 text-xs rounded border border-yellow-300 dark:border-yellow-700 bg-white dark:bg-surface-800 text-slate-800 dark:text-slate-200 outline-none focus:border-yellow-500"
                 onKeyDown={(e) => e.key === 'Enter' && handleFindReplace()}
               />
               <button onClick={handleFindReplace} className="px-3 py-1 text-xs font-medium bg-yellow-500 text-white rounded hover:bg-yellow-600 transition-colors">
@@ -372,7 +372,7 @@ export default function EditorSection() {
           </div>
 
           <div className="flex-1 min-h-0 flex flex-col lg:flex-row">
-            <div className={`${activeTab === 'editor' ? 'flex' : splitMode ? 'hidden lg:flex' : 'hidden'} flex-1 flex-col min-w-0 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-surface-700`}>
+            <div className={`${activeTab === 'editor' ? 'flex' : splitMode ? 'hidden lg:flex' : 'hidden'} flex-1 flex-col min-w-0 min-h-0 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-surface-700`}>
               <WordEditor
                 ref={editorRef}
                 onInput={handleWordInput}
@@ -381,7 +381,7 @@ export default function EditorSection() {
                 initialContent={wordContent}
               />
             </div>
-            <div className={`${activeTab === 'html' ? 'flex' : splitMode ? 'hidden lg:flex' : 'hidden'} flex-1 flex-col min-w-0`}>
+            <div className={`${activeTab === 'html' ? 'flex' : splitMode ? 'hidden lg:flex' : 'hidden'} flex-1 flex-col min-w-0 min-h-0`}>
               <HtmlEditor
                 html={htmlContent}
                 setHtml={handleHtmlChange}
@@ -405,37 +405,37 @@ export default function EditorSection() {
               <div className="flex items-center gap-0.5 sm:gap-1 overflow-x-auto">
                 <input ref={docxInputRef} type="file" accept=".docx" className="hidden" onChange={handleDocxUploadWrapper} />
                 <input ref={htmlInputRef} type="file" accept=".html,.htm" className="hidden" onChange={handleHtmlUploadWrapper} />
-                <button onClick={() => docxInputRef.current?.click()} className="shrink-0 inline-flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Upload DOCX">
+                <button onClick={() => docxInputRef.current?.click()} className="shrink-0 inline-flex items-center gap-1 px-2 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Upload DOCX">
                   <Upload className="w-3 h-3" />
+                  <span className="md:hidden">DOCX</span>
                   <span className="hidden md:inline">Upload DOCX</span>
-                  <span className="hidden sm:inline md:hidden">DOCX</span>
                 </button>
-                <button onClick={() => htmlInputRef.current?.click()} className="shrink-0 inline-flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Upload HTML">
+                <button onClick={() => htmlInputRef.current?.click()} className="shrink-0 inline-flex items-center gap-1 px-2 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Upload HTML">
                   <Upload className="w-3 h-3" />
+                  <span className="md:hidden">HTML</span>
                   <span className="hidden md:inline">Upload HTML</span>
-                  <span className="hidden sm:inline md:hidden">HTML</span>
                 </button>
                 <div className="w-px h-4 bg-slate-300 dark:bg-surface-600 mx-0.5 shrink-0" />
-                <button onClick={handleDownloadDocx} className="shrink-0 inline-flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Download as DOCX">
+                <button onClick={handleDownloadDocx} className="shrink-0 inline-flex items-center gap-1 px-2 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Download as DOCX">
                   <Download className="w-3 h-3" />
+                  <span className="md:hidden">.doc</span>
                   <span className="hidden md:inline">Download .doc</span>
-                  <span className="hidden sm:inline md:hidden">.doc</span>
                 </button>
-                <button onClick={handleDownload} className="shrink-0 inline-flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Download as HTML">
+                <button onClick={handleDownload} className="shrink-0 inline-flex items-center gap-1 px-2 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Download as HTML">
                   <Download className="w-3 h-3" />
+                  <span className="md:hidden">.html</span>
                   <span className="hidden md:inline">Download .html</span>
-                  <span className="hidden sm:inline md:hidden">.html</span>
                 </button>
                 <div className="w-px h-4 bg-slate-300 dark:bg-surface-600 mx-0.5 shrink-0" />
-                <button onClick={handleCopyHtml} className={`shrink-0 inline-flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded text-[11px] font-medium transition-colors ${
+                <button onClick={handleCopyHtml} className={`shrink-0 inline-flex items-center gap-1 px-2 sm:px-2 py-1 rounded text-[11px] font-medium transition-colors ${
                   copied ? 'text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-900/20' : 'text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200'
                 }`} title="Copy HTML to clipboard">
                   {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                  <span className="hidden sm:inline">{copied ? 'Copied!' : 'Copy'}</span>
+                  <span>{copied ? 'Copied!' : 'Copy'}</span>
                 </button>
-                <button onClick={handlePrint} className="shrink-0 inline-flex items-center gap-1 px-1.5 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Print">
+                <button onClick={handlePrint} className="shrink-0 inline-flex items-center gap-1 px-2 sm:px-2 py-1 rounded text-[11px] font-medium text-slate-500 dark:text-surface-400 hover:bg-slate-200 dark:hover:bg-surface-700 hover:text-slate-700 dark:hover:text-surface-200 transition-colors" title="Print">
                   <Printer className="w-3 h-3" />
-                  <span className="hidden sm:inline">Print</span>
+                  <span>Print</span>
                 </button>
               </div>
             </div>

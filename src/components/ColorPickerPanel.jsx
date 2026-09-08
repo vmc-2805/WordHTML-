@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react'
-import { Pipette, RotateCcw } from 'lucide-react'
-import { hexToRgb, rgbToHex, rgbToHsl, hslToRgb } from '../utils/colorUtils'
+import { Pipette } from 'lucide-react'
+import { hexToRgb, rgbToHex, rgbToHsl, hslToRgb, parseColorInput } from '../utils/colorUtils'
 
 const PRESETS = [
   '#000000', '#434343', '#666666', '#999999', '#b7b7b7', '#cccccc', '#d9d9d9', '#efefef', '#f3f3f3', '#ffffff',
@@ -15,66 +15,133 @@ const PRESETS = [
 
 export default function ColorPickerPanel({ color, onChange, showOpacity = false, opacity = 100, onOpacityChange }) {
   const inputRef = useRef(null)
-  const { r, g, b } = hexToRgb(color)
-  const hsl = rgbToHsl(r, g, b)
+  const [activeTab, setActiveTab] = useState('hex')
+  const [preview, setPreview] = useState(color)
+  const [msg, setMsg] = useState('')
+  const msgTimer = useRef(null)
 
   const [hexInput, setHexInput] = useState(color)
-  const [rInput, setRInput] = useState(String(r))
-  const [gInput, setGInput] = useState(String(g))
-  const [bInput, setBInput] = useState(String(b))
-  const [hInput, setHInput] = useState(String(hsl.h))
-  const [sInput, setSInput] = useState(String(hsl.s))
-  const [lInput, setLInput] = useState(String(hsl.l))
-  const [activeTab, setActiveTab] = useState('hex')
+  const [rInput, setRInput] = useState('')
+  const [gInput, setGInput] = useState('')
+  const [bInput, setBInput] = useState('')
+  const [hInput, setHInput] = useState('')
+  const [sInput, setSInput] = useState('')
+  const [lInput, setLInput] = useState('')
 
-  useEffect(() => {
-    setHexInput(color)
+  const syncFromHex = (hex) => {
+    const { r, g, b } = hexToRgb(hex)
     setRInput(String(r))
     setGInput(String(g))
     setBInput(String(b))
+    const hsl = rgbToHsl(r, g, b)
     setHInput(String(hsl.h))
     setSInput(String(hsl.s))
     setLInput(String(hsl.l))
-  }, [color])
+  }
 
-  const handleHexApply = () => {
-    const match = hexInput.match(/^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/)
-    if (match) {
-      let hex = match[1]
-      if (hex.length === 3) hex = hex.split('').map(c => c + c).join('')
-      onChange('#' + hex.toLowerCase())
+  useEffect(() => {
+    setPreview(color)
+    setHexInput(color)
+    syncFromHex(color)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
+  const flash = (text) => {
+    setMsg(text)
+    clearTimeout(msgTimer.current)
+    msgTimer.current = setTimeout(() => setMsg(''), 1200)
+  }
+
+  const applyHex = () => {
+    const h = parseColorInput(hexInput)
+    if (!h) {
+      setHexInput(color)
+      flash('Invalid HEX')
+      return
+    }
+    setHexInput(h)
+    syncFromHex(h)
+    setPreview(h)
+    onChange(h)
+    flash('Applied')
+  }
+
+  const applyRgb = (fromLive = false, current = null) => {
+    const r = current?.r ?? rInput
+    const g = current?.g ?? gInput
+    const b = current?.b ?? bInput
+    const rv = Math.min(255, Math.max(0, parseInt(r) || 0))
+    const gv = Math.min(255, Math.max(0, parseInt(g) || 0))
+    const bv = Math.min(255, Math.max(0, parseInt(b) || 0))
+    const h = rgbToHex(rv, gv, bv)
+    if (fromLive) {
+      updateLive(h)
+      return
+    }
+    setRInput(String(rv))
+    setGInput(String(gv))
+    setBInput(String(bv))
+    setHexInput(h)
+    syncFromHex(h)
+    setPreview(h)
+    onChange(h)
+    flash('Applied')
+  }
+
+  const applyHsl = (fromLive = false, current = null) => {
+    const hh = current?.h ?? hInput
+    const ss = current?.s ?? sInput
+    const ll = current?.l ?? lInput
+    const hv = Math.min(360, Math.max(0, parseInt(hh) || 0))
+    const sv = Math.min(100, Math.max(0, parseInt(ss) || 0))
+    const lv = Math.min(100, Math.max(0, parseInt(ll) || 0))
+    const rgb = hslToRgb(hv, sv, lv)
+    const h = rgbToHex(rgb.r, rgb.g, rgb.b)
+    if (fromLive) {
+      updateLive(h)
+      return
+    }
+    setHInput(String(hv))
+    setSInput(String(sv))
+    setLInput(String(lv))
+    setHexInput(h)
+    syncFromHex(h)
+    setPreview(h)
+    onChange(h)
+    flash('Applied')
+  }
+
+  const updateLive = (h) => {
+    setPreview(h)
+    setHexInput(h)
+  }
+
+  const applyPreset = (c) => {
+    setPreview(c)
+    setHexInput(c)
+    syncFromHex(c)
+    onChange(c)
+  }
+
+  const handleNativePicker = (e) => {
+    if (inputRef.current) {
+      inputRef.current.value = color
+      inputRef.current.click()
     }
   }
 
-  const handleRgbApply = () => {
-    const rv = Math.min(255, Math.max(0, parseInt(rInput) || 0))
-    const gv = Math.min(255, Math.max(0, parseInt(gInput) || 0))
-    const bv = Math.min(255, Math.max(0, parseInt(bInput) || 0))
-    onChange(rgbToHex(rv, gv, bv))
-  }
-
-  const handleHslApply = () => {
-    const hv = Math.min(360, Math.max(0, parseInt(hInput) || 0))
-    const sv = Math.min(100, Math.max(0, parseInt(sInput) || 0))
-    const lv = Math.min(100, Math.max(0, parseInt(lInput) || 0))
-    const rgb = hslToRgb(hv, sv, lv)
-    onChange(rgbToHex(rgb.r, rgb.g, rgb.b))
-  }
-
-  const handleNativePicker = () => inputRef.current?.click()
+  const { r, g, b } = hexToRgb(preview)
 
   return (
     <div className="w-[240px] bg-white dark:bg-surface-800 border border-slate-200 dark:border-surface-700 rounded-xl shadow-2xl p-3 select-none">
       <div className="flex items-center gap-2 mb-3">
         <div
           className="w-10 h-10 rounded-lg border-2 border-slate-300 dark:border-surface-500 shadow-inner flex-shrink-0"
-          style={{ backgroundColor: color, opacity: showOpacity ? opacity / 100 : 1 }}
+          style={{ backgroundColor: preview, opacity: showOpacity ? opacity / 100 : 1 }}
         />
         <div className="flex-1 min-w-0">
-          <div className="text-[11px] font-semibold text-slate-700 dark:text-slate-200 truncate">{color.toUpperCase()}</div>
-          <div className="text-[10px] text-slate-400 dark:text-surface-500">
-            RGB({r}, {g}, {b})
-          </div>
+          <div className="text-[11px] font-semibold text-slate-700 dark:text-slate-200 truncate">{preview.toUpperCase()}</div>
+          <div className="text-[10px] text-slate-400 dark:text-surface-500">RGB({r}, {g}, {b})</div>
         </div>
         <button
           type="button"
@@ -87,9 +154,9 @@ export default function ColorPickerPanel({ color, onChange, showOpacity = false,
         <input
           ref={inputRef}
           type="color"
-          value={color}
+          value={preview}
           className="absolute w-0 h-0 opacity-0 pointer-events-none"
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => applyPreset(e.target.value)}
         />
       </div>
 
@@ -99,12 +166,12 @@ export default function ColorPickerPanel({ color, onChange, showOpacity = false,
             key={c}
             type="button"
             className={`w-5 h-5 rounded border transition-transform hover:scale-125 ${
-              color.toLowerCase() === c.toLowerCase()
+              preview.toLowerCase() === c.toLowerCase()
                 ? 'border-primary-500 ring-1 ring-primary-400 scale-110'
                 : 'border-slate-200 dark:border-surface-600'
             }`}
             style={{ backgroundColor: c }}
-            onClick={() => onChange(c)}
+            onClick={() => applyPreset(c)}
           />
         ))}
       </div>
@@ -131,15 +198,19 @@ export default function ColorPickerPanel({ color, onChange, showOpacity = false,
           <input
             type="text"
             value={hexInput}
-            onChange={(e) => setHexInput(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && handleHexApply()}
-            onBlur={handleHexApply}
+            onChange={(e) => {
+              const v = e.target.value
+              setHexInput(v)
+              const parsed = parseColorInput(v)
+              if (parsed) updateLive(parsed)
+            }}
+            onKeyDown={(e) => e.key === 'Enter' && applyHex()}
             className="flex-1 px-2 py-1.5 text-xs font-mono rounded-lg border border-slate-200 dark:border-surface-600 bg-slate-50 dark:bg-surface-900 text-slate-700 dark:text-slate-200 outline-none focus:border-primary-500"
             placeholder="#000000"
           />
           <button
             type="button"
-            onClick={handleHexApply}
+            onClick={applyHex}
             className="px-2 py-1.5 text-[10px] font-semibold rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors"
           >
             Set
@@ -157,20 +228,23 @@ export default function ColorPickerPanel({ color, onChange, showOpacity = false,
             <div key={label} className="flex-1">
               <div className="text-[9px] text-slate-400 dark:text-surface-500 mb-0.5 text-center">{label}</div>
               <input
-                type="number"
-                min="0"
-                max={max}
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 value={val}
-                onChange={(e) => set(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleRgbApply()}
-                onBlur={handleRgbApply}
-                className="w-full px-1 py-1.5 text-xs font-mono text-center rounded-lg border border-slate-200 dark:border-surface-600 bg-slate-50 dark:bg-surface-900 text-slate-700 dark:text-slate-200 outline-none focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                onChange={(e) => {
+                  const v = e.target.value
+                  set(v)
+                  applyRgb(true, { ...(label === 'R' ? { r: v } : {}), ...(label === 'G' ? { g: v } : {}), ...(label === 'B' ? { b: v } : {}) })
+                }}
+                onKeyDown={(e) => e.key === 'Enter' && applyRgb()}
+                className="w-full px-1 py-1.5 text-xs font-mono text-center rounded-lg border border-slate-200 dark:border-surface-600 bg-slate-50 dark:bg-surface-900 text-slate-700 dark:text-slate-200 outline-none focus:border-primary-500"
               />
             </div>
           ))}
           <button
             type="button"
-            onClick={handleRgbApply}
+            onClick={applyRgb}
             className="self-end px-2 py-1.5 text-[10px] font-semibold rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors"
           >
             Set
@@ -188,20 +262,23 @@ export default function ColorPickerPanel({ color, onChange, showOpacity = false,
             <div key={label} className="flex-1">
               <div className="text-[9px] text-slate-400 dark:text-surface-500 mb-0.5 text-center">{label}</div>
               <input
-                type="number"
-                min="0"
-                max={max}
+                type="text"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 value={val}
-                onChange={(e) => set(e.target.value)}
-                onKeyDown={(e) => e.key === 'Enter' && handleHslApply()}
-                onBlur={handleHslApply}
-                className="w-full px-1 py-1.5 text-xs font-mono text-center rounded-lg border border-slate-200 dark:border-surface-600 bg-slate-50 dark:bg-surface-900 text-slate-700 dark:text-slate-200 outline-none focus:border-primary-500 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                onChange={(e) => {
+                  const v = e.target.value
+                  set(v)
+                  applyHsl(true, { ...(label === 'H' ? { h: v } : {}), ...(label === 'S' ? { s: v } : {}), ...(label === 'L' ? { l: v } : {}) })
+                }}
+                onKeyDown={(e) => e.key === 'Enter' && applyHsl()}
+                className="w-full px-1 py-1.5 text-xs font-mono text-center rounded-lg border border-slate-200 dark:border-surface-600 bg-slate-50 dark:bg-surface-900 text-slate-700 dark:text-slate-200 outline-none focus:border-primary-500"
               />
             </div>
           ))}
           <button
             type="button"
-            onClick={handleHslApply}
+            onClick={applyHsl}
             className="self-end px-2 py-1.5 text-[10px] font-semibold rounded-lg bg-primary-500 text-white hover:bg-primary-600 transition-colors"
           >
             Set
@@ -209,8 +286,14 @@ export default function ColorPickerPanel({ color, onChange, showOpacity = false,
         </div>
       )}
 
+      <div className="mt-2 h-3 flex items-center">
+        {msg && (
+          <span className="text-[10px] font-medium text-primary-600 dark:text-primary-400">{msg}</span>
+        )}
+      </div>
+
       {showOpacity && (
-        <div className="mt-3">
+        <div className="mt-1">
           <div className="flex items-center justify-between mb-1">
             <span className="text-[10px] text-slate-500 dark:text-surface-400 font-medium">Opacity</span>
             <span className="text-[10px] font-mono text-slate-600 dark:text-slate-300">{opacity}%</span>

@@ -19,7 +19,7 @@ const CleanButton = ({ onClick, title, icon: Icon, color }) => (
 
 export default function CleaningToolbar({ onClean, onCleanAll, onFormat }) {
   return (
-    <div className="flex items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50">
+    <div className="flex items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50 overflow-x-auto whitespace-nowrap lg:flex-wrap lg:overflow-x-visible">
       <CleanButton onClick={() => onClean('inlineStyles')} title="Remove Inline Styles" icon={Paintbrush} color="text-amber-500" />
       <CleanButton onClick={() => onClean('emptyTags')} title="Remove Empty Tags" icon={Trash2} color="text-rose-500" />
       <CleanButton onClick={() => onClean('classes')} title="Remove Classes" icon={Tag} color="text-violet-500" />

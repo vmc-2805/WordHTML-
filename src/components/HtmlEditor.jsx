@@ -20,9 +20,9 @@ export default function HtmlEditor({ html, setHtml, onClean, onCleanAll }) {
   }, [html, setHtml])
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full overflow-hidden">
       <CleaningToolbar onClean={onClean} onCleanAll={onCleanAll} onFormat={handleFormat} />
-      <div className="flex-1 flex overflow-hidden">
+      <div className="flex-1 min-h-0 flex overflow-hidden">
         <div
           ref={lineNumbersRef}
           className="w-12 bg-slate-100 dark:bg-surface-900 text-slate-400 dark:text-surface-600 text-right py-4 pr-2 text-xs font-mono select-none overflow-hidden border-r border-slate-200 dark:border-surface-700"
