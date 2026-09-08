@@ -45,17 +45,23 @@
   html { scroll-behavior: smooth; }
   body { font-family: 'Inter', system-ui, -apple-system, sans-serif; -webkit-font-smoothing: antialiased; color: #1e293b; }
   .dark body { color: #e2e8f0; }
-  ::-webkit-scrollbar { width: 8px; height: 8px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 4px; }
-  .dark ::-webkit-scrollbar-track { background: #1e293b; }
-  ::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 4px; }
-  .dark ::-webkit-scrollbar-thumb { background: #475569; }
-  ::-webkit-scrollbar-thumb:hover { background: #64748b; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; border-radius: 999px; }
+  .dark ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 999px; }
+  .dark ::-webkit-scrollbar-thumb { background: #334155; }
+  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  .dark ::-webkit-scrollbar-thumb:hover { background: #475569; }
+  ::-webkit-scrollbar-corner { background: transparent; }
+  * { scrollbar-width: thin; scrollbar-color: #cbd5e1 transparent; }
+  .dark * { scrollbar-color: #334155 transparent; }
 }
 
 @layer components {
   .word-editor-content { min-height: 400px; outline: none; line-height: 1.7; font-size: 15px; }
   .word-editor-content:focus { outline: none; }
+  .word-editor-content ::selection, .word-editor-content::selection { background: rgba(14, 89, 82, 0.28); color: inherit; }
+  .dark .word-editor-content ::selection, .dark .word-editor-content::selection { background: rgba(63, 168, 158, 0.4); color: inherit; }
   .word-editor-content h1 { font-size: 2em; font-weight: 700; margin: 0.5em 0; }
   .word-editor-content h2 { font-size: 1.5em; font-weight: 600; margin: 0.5em 0; }
   .word-editor-content h3 { font-size: 1.25em; font-weight: 600; margin: 0.5em 0; }

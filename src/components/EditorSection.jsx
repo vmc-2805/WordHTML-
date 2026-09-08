@@ -37,6 +37,7 @@ export default function EditorSection() {
   const [wordContent, setWordContent] = useState(sampleWordContent)
   const [htmlContent, setHtmlContent] = useState(sampleHtmlContent)
   const [activeTab, setActiveTab] = useState('editor')
+  const [splitMode, setSplitMode] = useState(true)
   const [copied, setCopied] = useState(false)
   const [showFindReplace, setShowFindReplace] = useState(false)
   const [findText, setFindText] = useState('')
@@ -58,15 +59,69 @@ export default function EditorSection() {
         e.preventDefault()
         handleDownload()
       }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'z') {
+        e.preventDefault()
+        if (e.shiftKey) handleRedo()
+        else handleUndo()
+      }
+      if ((e.ctrlKey || e.metaKey) && e.key === 'y') {
+        e.preventDefault()
+        handleRedo()
+      }
     }
     document.addEventListener('keydown', handler)
     return () => document.removeEventListener('keydown', handler)
+  })
+
+  const historyRef = useRef({ past: [], future: [], timer: null })
+
+  const pushHistory = useCallback((html) => {
+    clearTimeout(historyRef.current.timer)
+    historyRef.current.timer = setTimeout(() => {
+      const h = historyRef.current
+      h.past.push(html)
+      if (h.past.length > 100) h.past.shift()
+      h.future = []
+    }, 400)
+  }, [])
+
+  const handleUndo = useCallback(() => {
+    const h = historyRef.current
+    clearTimeout(h.timer)
+    const currentHtml = editorRef.current?.innerHTML ?? ''
+    if (!h.past.length) return
+    const prev = h.past.pop()
+    h.future.push(currentHtml)
+    if (editorRef.current) editorRef.current.innerHTML = prev
+    setWordContent(prev)
+    setHtmlContent(prev)
+    editorRef.current?.focus()
+  }, [])
+
+  const handleRedo = useCallback(() => {
+    const h = historyRef.current
+    clearTimeout(h.timer)
+    const currentHtml = editorRef.current?.innerHTML ?? ''
+    if (!h.future.length) return
+    const next = h.future.pop()
+    h.past.push(currentHtml)
+    if (editorRef.current) editorRef.current.innerHTML = next
+    setWordContent(next)
+    setHtmlContent(next)
+    editorRef.current?.focus()
+  }, [])
+
+  useEffect(() => {
+    historyRef.current.past = [wordContent]
+    historyRef.current.future = []
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleWordInput = useCallback((html) => {
     setWordContent(html)
     setHtmlContent(html)
-  }, [])
+    pushHistory(html)
+  }, [pushHistory])
 
   const handleHtmlChange = useCallback((newHtml) => {
     setHtmlContent(newHtml)
@@ -74,7 +129,8 @@ export default function EditorSection() {
       editorRef.current.innerHTML = newHtml
     }
     setWordContent(newHtml)
-  }, [])
+    pushHistory(newHtml)
+  }, [pushHistory])
 
   const handleClean = useCallback((type) => {
     const fn = cleanFns[type]
@@ -131,7 +187,7 @@ export default function EditorSection() {
   const handleDownload = () => downloadFile(htmlContent, 'document.html')
 
   const handleDownloadDocx = () => {
-    const htmlWithStyles = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Document</title><style>body{font-family:Calibri,sans-serif;font-size:11pt;line-height:1.5;padding:1in;}table{border-collapse:collapse;}td,th{border:1px solid #000;padding:4pt 8pt;}img{max-width:100%;}ul,ol{margin-left:1.5em;}</style></head><body>${htmlContent}</body></html>`
+    const htmlWithStyles = `<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'><head><meta charset='utf-8'><title>Document</title><style>body{font-family:Calibri,sans-serif;font-size:11pt;line-height:1.5;padding:1in;}table{border-collapse:collapse;mso-border-alt:solid black 0.5pt;}td,th{border:1pt solid #000;mso-border-alt:solid #000 0.5pt;padding:4pt 8pt;}img{max-width:100%;}ul,ol{margin-left:1.5em;}</style></head><body>${htmlContent}</body></html>`
     const blob = new Blob(['\ufeff', htmlWithStyles], { type: 'application/msword' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -209,8 +265,8 @@ export default function EditorSection() {
             onCopyHtml={handleCopyHtml}
             onPrint={handlePrint}
             onClearAll={handleClearAll}
-            onUndo={() => document.execCommand('undo')}
-            onRedo={() => document.execCommand('redo')}
+            onUndo={handleUndo}
+            onRedo={handleRedo}
             onFindReplace={() => setShowFindReplace(prev => !prev)}
             wordEditorRef={editorRef}
           />
@@ -244,7 +300,7 @@ export default function EditorSection() {
           )}
 
           <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-4 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/80">
-            <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-surface-800 rounded-lg">
+            <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-surface-800 rounded-lg lg:hidden">
               <button
                 onClick={() => setActiveTab('editor')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
@@ -254,8 +310,7 @@ export default function EditorSection() {
                 }`}
               >
                 <FileText className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Word Editor</span>
-                <span className="sm:hidden">Word</span>
+                <span>Word Editor</span>
               </button>
               <button
                 onClick={() => setActiveTab('html')}
@@ -266,8 +321,46 @@ export default function EditorSection() {
                 }`}
               >
                 <Code2 className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">HTML Code</span>
-                <span className="sm:hidden">HTML</span>
+                <span>HTML Code</span>
+              </button>
+            </div>
+
+            <div className="hidden lg:flex items-center gap-1 p-1 bg-slate-100 dark:bg-surface-800 rounded-lg">
+              <button
+                onClick={() => { setSplitMode(false); setActiveTab('editor') }}
+                title="Show only the Word editor"
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  !splitMode && activeTab === 'editor'
+                    ? 'bg-white dark:bg-surface-700 text-primary-600 dark:text-primary-400 shadow-sm'
+                    : 'text-slate-500 dark:text-surface-400 hover:text-slate-700 dark:hover:text-surface-200'
+                }`}
+              >
+                <FileText className="w-3.5 h-3.5" />
+                Word Editor
+              </button>
+              <button
+                onClick={() => { setSplitMode(false); setActiveTab('html') }}
+                title="Show only the HTML code"
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  !splitMode && activeTab === 'html'
+                    ? 'bg-white dark:bg-surface-700 text-primary-600 dark:text-primary-400 shadow-sm'
+                    : 'text-slate-500 dark:text-surface-400 hover:text-slate-700 dark:hover:text-surface-200'
+                }`}
+              >
+                <Code2 className="w-3.5 h-3.5" />
+                HTML Code
+              </button>
+              <button
+                onClick={() => setSplitMode(true)}
+                title="View both editors side by side"
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-all ${
+                  splitMode
+                    ? 'bg-white dark:bg-surface-700 text-primary-600 dark:text-primary-400 shadow-sm'
+                    : 'text-slate-500 dark:text-surface-400 hover:text-slate-700 dark:hover:text-surface-200'
+                }`}
+              >
+                <span className={`w-1.5 h-1.5 rounded-full ${splitMode ? 'bg-emerald-500' : 'bg-slate-400 dark:bg-surface-600'}`} />
+                Split
               </button>
             </div>
 
@@ -278,8 +371,8 @@ export default function EditorSection() {
             </div>
           </div>
 
-          <div className="flex-1 min-h-[400px] relative">
-            <div className={activeTab === 'editor' ? 'h-full' : 'h-full hidden'}>
+          <div className="flex-1 min-h-0 flex flex-col lg:flex-row">
+            <div className={`${activeTab === 'editor' ? 'flex' : splitMode ? 'hidden lg:flex' : 'hidden'} flex-1 flex-col min-w-0 border-b lg:border-b-0 lg:border-r border-slate-200 dark:border-surface-700`}>
               <WordEditor
                 ref={editorRef}
                 onInput={handleWordInput}
@@ -288,7 +381,7 @@ export default function EditorSection() {
                 initialContent={wordContent}
               />
             </div>
-            <div className={activeTab === 'html' ? 'h-full' : 'h-full hidden'}>
+            <div className={`${activeTab === 'html' ? 'flex' : splitMode ? 'hidden lg:flex' : 'hidden'} flex-1 flex-col min-w-0`}>
               <HtmlEditor
                 html={htmlContent}
                 setHtml={handleHtmlChange}

@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import Navbar from './Navbar';
 import Footer from './Footer';
 
 export default function Layout() {
+  const { pathname } = useLocation();
+  const hideFooter = pathname === '/editor';
   const [darkMode, setDarkMode] = useState(() => {
     try {
       const saved = localStorage.getItem('wordhtml-dark');
@@ -27,7 +29,7 @@ export default function Layout() {
       <main>
         <Outlet />
       </main>
-      <Footer />
+      {!hideFooter && <Footer />}
     </div>
   );
 }

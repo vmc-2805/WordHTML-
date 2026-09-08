@@ -9,7 +9,7 @@ export default function Editor() {
   });
 
   return (
-    <section className="pt-16 h-[calc(100vh-4rem)] bg-slate-50 dark:bg-surface-950 overflow-hidden">
+    <section className="pt-16 h-screen bg-slate-50 dark:bg-surface-950 overflow-hidden">
       <div className="h-full max-w-[1600px] mx-auto px-2 sm:px-4 lg:px-6 py-2 sm:py-3">
         <EditorSection />
       </div>
