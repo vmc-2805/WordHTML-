@@ -96,9 +96,9 @@ export default function MenuToolbar({ activeTab, setActiveTab, onNewFile, onOpen
   }
 
   return (
-    <div className="flex items-center gap-0 px-2 py-0.5 bg-slate-100 dark:bg-surface-800 border-b border-slate-200 dark:border-surface-700 select-none relative">
+    <div className="toolbar-scroll flex items-center gap-0 px-2 py-0.5 bg-slate-100 dark:bg-surface-800 border-b border-slate-200 dark:border-surface-700 select-none relative overflow-x-auto whitespace-nowrap">
       {Object.entries(menus).map(([name, items]) => (
-        <div key={name} className="relative">
+        <div key={name} className="relative shrink-0">
           <button
             onClick={() => setOpenMenu(openMenu === name ? null : name)}
             onMouseEnter={() => openMenu && setOpenMenu(name)}

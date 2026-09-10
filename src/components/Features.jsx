@@ -1,4 +1,4 @@
-﻿import { Zap, Shield, Download, Wand2, FileText, RefreshCw } from 'lucide-react';
+﻿import { Zap, Download, Wand2, FileText, RefreshCw, Eye } from 'lucide-react';
 import { useStaggerReveal } from '../hooks/useScrollReveal';
 
 const features = [
@@ -19,9 +19,9 @@ const features = [
     iconColor: 'text-accent-600 dark:text-accent-400',
   },
   {
-    icon: Shield,
-    title: '100% Client-side',
-    description: 'Your content never leaves your browser. Complete privacy guaranteed.',
+    icon: Eye,
+    title: 'Live Preview',
+    description: 'View formatted content and raw HTML side by side with instant sync.',
     color: 'from-emerald-500/20 to-emerald-600/20',
     iconBg: 'bg-emerald-100 dark:bg-emerald-500/10',
     iconColor: 'text-emerald-500 dark:text-emerald-400',

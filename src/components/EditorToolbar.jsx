@@ -240,7 +240,7 @@ export default function EditorToolbar({ editorRef }) {
   }
 
   return (
-    <div className="flex flex-wrap items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50 overflow-visible whitespace-nowrap">
+    <div className="toolbar-scroll flex items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50 overflow-x-auto whitespace-nowrap">
       <ToolButton onClick={() => exec('undo')} title="Undo">
         <Undo2 className="w-4 h-4" />
       </ToolButton>
@@ -265,7 +265,7 @@ export default function EditorToolbar({ editorRef }) {
 
       <Divider />
 
-      <div className="tooltip-wrapper">
+      <div className="tooltip-wrapper shrink-0">
         <select
           onChange={handleFontFamily}
           className="h-8 px-1 text-xs rounded border border-slate-200 dark:border-surface-600 bg-white dark:bg-surface-800 text-slate-700 dark:text-slate-300 outline-none cursor-pointer"
@@ -282,7 +282,7 @@ export default function EditorToolbar({ editorRef }) {
         </select>
       </div>
 
-      <div className="tooltip-wrapper">
+      <div className="tooltip-wrapper shrink-0">
         <select
           onChange={handleFontSize}
           className="h-8 px-1 text-xs rounded border border-slate-200 dark:border-surface-600 bg-white dark:bg-surface-800 text-slate-700 dark:text-slate-300 outline-none cursor-pointer"
@@ -313,7 +313,7 @@ export default function EditorToolbar({ editorRef }) {
 
       <Divider />
 
-<div className="flex items-center gap-0.5">
+<div className="flex items-center gap-0.5 shrink-0">
         <div className="relative">
           <div className="tooltip-wrapper">
             <button

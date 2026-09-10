@@ -19,7 +19,7 @@ const CleanButton = ({ onClick, title, icon: Icon, color }) => (
 
 export default function CleaningToolbar({ onClean, onCleanAll, onFormat }) {
   return (
-    <div className="flex flex-wrap items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50 overflow-visible whitespace-nowrap">
+    <div className="toolbar-scroll flex items-center gap-0.5 px-3 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/50 overflow-x-auto whitespace-nowrap">
       <CleanButton onClick={() => onClean('inlineStyles')} title="Remove Inline Styles" icon={Paintbrush} color="text-amber-500" />
       <CleanButton onClick={() => onClean('emptyTags')} title="Remove Empty Tags" icon={Trash2} color="text-rose-500" />
       <CleanButton onClick={() => onClean('classes')} title="Remove Classes" icon={Tag} color="text-violet-500" />
@@ -30,13 +30,13 @@ export default function CleaningToolbar({ onClean, onCleanAll, onFormat }) {
       <CleanButton onClick={() => onClean('spans')} title="Remove Spans" icon={Code2} color="text-pink-500" />
       <CleanButton onClick={() => onClean('semantic')} title="Semantic HTML" icon={FileCode} color="text-emerald-500" />
 
-      <div className="toolbar-divider" />
+      <div className="toolbar-divider shrink-0" />
 
       <CleanButton onClick={onFormat} title="Format HTML" icon={Eraser} color="text-primary-500" />
 
-      <div className="toolbar-divider" />
+      <div className="toolbar-divider shrink-0" />
 
-      <div className="tooltip-wrapper">
+      <div className="tooltip-wrapper shrink-0">
         <button
           type="button"
           onClick={onCleanAll}

@@ -299,8 +299,8 @@ export default function EditorSection() {
             </div>
           )}
 
-          <div className="flex flex-wrap items-center justify-between gap-2 px-3 sm:px-4 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/80">
-            <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-surface-800 rounded-lg lg:hidden">
+          <div className="toolbar-scroll flex items-center gap-2 px-3 sm:px-4 py-2 border-b border-slate-200 dark:border-surface-700 bg-slate-50 dark:bg-surface-900/80 overflow-x-auto whitespace-nowrap">
+            <div className="flex items-center gap-1 p-1 bg-slate-100 dark:bg-surface-800 rounded-lg lg:hidden shrink-0">
               <button
                 onClick={() => setActiveTab('editor')}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
@@ -325,7 +325,7 @@ export default function EditorSection() {
               </button>
             </div>
 
-            <div className="hidden lg:flex items-center gap-1 p-1 bg-slate-100 dark:bg-surface-800 rounded-lg">
+            <div className="hidden lg:flex items-center gap-1 p-1 bg-slate-100 dark:bg-surface-800 rounded-lg shrink-0">
               <button
                 onClick={() => { setSplitMode(false); setActiveTab('editor') }}
                 title="Show only the Word editor"
@@ -364,7 +364,7 @@ export default function EditorSection() {
               </button>
             </div>
 
-            <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
               <ToolBtn onClick={handleLoadSampleWord} icon={FileText} label="Sample" />
               <ToolBtn onClick={handleLoadSampleHtml} icon={Code2} label="Sample HTML" />
               <ToolBtn onClick={handleClearAll} icon={Trash2} label="Clear" />
